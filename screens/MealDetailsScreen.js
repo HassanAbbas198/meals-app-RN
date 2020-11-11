@@ -23,7 +23,7 @@ MealDetailsScreen.navigationOptions = (navigationData) => {
 
 	return {
 		headerTitle: selectedMeal.title,
-		headerRight: (
+		headerRight: () => (
 			<HeaderButtons HeaderButtonComponent={HeaderButton}>
 				<Item
 					title="Fav"
