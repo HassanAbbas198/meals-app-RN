@@ -1,16 +1,7 @@
 import React from 'react';
-import {
-	View,
-	Text,
-	StyleSheet,
-	Button,
-	FlatList,
-	TouchableOpacity,
-	Platform,
-} from 'react-native';
+import { StyleSheet, FlatList } from 'react-native';
 
 import { CATEGORIES } from '../data/dummy-data';
-import Colors from '../constants/Colors';
 
 import CategoryGridTile from '../components/CategoryGridTile';
 
@@ -47,11 +38,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-	},
-
-	gridItem: {
-		flex: 1,
-		margin: 15,
 	},
 });
 
