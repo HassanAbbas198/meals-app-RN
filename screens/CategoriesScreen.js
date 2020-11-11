@@ -41,10 +41,6 @@ const CategoriesScreen = (props) => {
 // adding a title to the header of the screen
 CategoriesScreen.navigationOptions = {
 	headerTitle: 'Categories',
-	headerStyle: {
-		backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : '',
-	},
-	headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primaryColor,
 };
 
 const styles = StyleSheet.create({
