@@ -1,1 +1,1 @@
-export { toggleFavorite } from './meals';
+export { toggleFavorite, setFilters } from './meals';

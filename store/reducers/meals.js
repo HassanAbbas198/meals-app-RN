@@ -29,6 +29,28 @@ const reducer = (state = initialState, action) => {
 				};
 			}
 
+		case actionTypes.SET_FILTERS:
+			const appliedFilters = action.filters;
+			const updatedFilteredMeals = state.meals.filter((meal) => {
+				if (appliedFilters.glutenFree && !meal.isGlutenFree) {
+					return false;
+				}
+				if (appliedFilters.lactoseFree && !meal.isLactoseFree) {
+					return false;
+				}
+				if (appliedFilters.vegan && !meal.isVegan) {
+					return false;
+				}
+				if (appliedFilters.vegetarian && !meal.isVegetarian) {
+					return false;
+				}
+				return true;
+			});
+			return {
+				...state,
+				filteredMeals: updatedFilteredMeals,
+			};
+
 		default:
 			return state;
 	}

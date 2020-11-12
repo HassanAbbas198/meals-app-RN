@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, Switch, Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useDispatch } from 'react-redux';
 
 import Colors from '../constants/Colors';
+import * as actions from '../store/actions/index';
 
 import HeaderButton from '../components/HeaderButton';
 
@@ -26,6 +28,8 @@ const FiltersScreen = (props) => {
 	const [isVegan, setIsVegan] = useState(false);
 	const [isVegetarian, setIsVegetarian] = useState(false);
 
+	const dispatch = useDispatch();
+
 	// always use useCallback on func that are dependency in useEffect
 	const saveFilters = useCallback(() => {
 		const appliedFilters = {
@@ -35,8 +39,8 @@ const FiltersScreen = (props) => {
 			vegetarian: isVegetarian,
 		};
 
-		console.log(appliedFilters);
-	}, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
+		dispatch(actions.setFilters(appliedFilters));
+	}, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch]);
 
 	const { navigation } = props;
 
