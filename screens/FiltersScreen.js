@@ -26,6 +26,7 @@ const FiltersScreen = (props) => {
 	const [isVegan, setIsVegan] = useState(false);
 	const [isVegetarian, setIsVegetarian] = useState(false);
 
+	// always use useCallback on func that are dependency in useEffect
 	const saveFilters = useCallback(() => {
 		const appliedFilters = {
 			glutenFree: isGlutenFree,
