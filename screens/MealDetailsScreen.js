@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as actions from '../store/actions/index';
 
 import HeaderButton from '../components/HeaderButton';
 import DefaultText from '../components/DefaultText';
@@ -18,8 +20,18 @@ const MealDetailsScreen = (props) => {
 	const mealId = props.navigation.getParam('mealId');
 
 	const availableMeals = useSelector((state) => state.meals.meals);
-
 	const selectedMeal = availableMeals.find((meal) => meal.id === mealId);
+
+	const dispatch = useDispatch();
+
+	const toggleFavHandler = useCallback(() => {
+		dispatch(actions.toggleFavorite(mealId));
+	}, [dispatch, mealId]);
+
+	const { navigation } = props;
+	useEffect(() => {
+		navigation.setParams({ toggleFav: toggleFavHandler });
+	}, [toggleFavHandler]);
 
 	return (
 		<ScrollView>
@@ -45,16 +57,13 @@ const MealDetailsScreen = (props) => {
 
 MealDetailsScreen.navigationOptions = (navigationData) => {
 	const mealTitle = navigationData.navigation.getParam('mealTitle');
+	const toggleFav = navigationData.navigation.getParam('toggleFav');
 
 	return {
 		headerTitle: mealTitle,
 		headerRight: () => (
 			<HeaderButtons HeaderButtonComponent={HeaderButton}>
-				<Item
-					title="Fav"
-					iconName="ios-star"
-					onPress={() => console.log('add to fav')}
-				/>
+				<Item title="Fav" iconName="ios-star" onPress={toggleFav} />
 			</HeaderButtons>
 		),
 	};
